@@ -108,3 +108,6 @@ def predict(
     probability, credit_score, rating = calculate_credit_score(df)
 
     return probability, credit_score, rating
+
+def model_status():
+    return {"model": "credit_risk", "status": "loaded"}

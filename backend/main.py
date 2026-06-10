@@ -1,8 +1,18 @@
 from fastapi import FastAPI,HTTPException
-from prediction_helper import predict
+from prediction_helper import predict,model_status
 from pydantic import BaseModel, Field
-
+from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "https://your-frontend-domain.vercel.app"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 class CreditRiskInput(BaseModel):
     age: int= Field(ge=18, lt=100)
     income: float=Field(gt=0)
@@ -23,11 +33,13 @@ class CreditRiskOutput(BaseModel):
     rating: str
     
     
-
+@app.get("/model_status")
+def main():
+    return model_status()
+    
 @app.post("/predict_credit_risk", response_model=CreditRiskOutput)
 def predict_credit_risk(input: CreditRiskInput):
     try:
-        loan_to_income_ratio = (input.loan_amount / input.income) if input.income > 0 else 0
         delinquent_ratio = (input.delinquent_months / input.total_loan_months *100) if input.total_loan_months > 0 else 0
         avg_dpd_per_delinquency = (input.total_dpd / input.delinquent_months) if input.delinquent_months > 0 else 0
         probability, credit_score, rating = predict(

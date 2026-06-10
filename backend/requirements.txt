@@ -1,4 +1,6 @@
-Python==3.10.11
+fastapi==0.136.3
+uvicorn[standard]==0.32.0
+pydantic==2.9.2
 numpy==2.2.6
 pandas==2.2.3
 joblib==1.5.3
