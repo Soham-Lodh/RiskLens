@@ -58,29 +58,25 @@ def prepare_df(
 
 
 def calculate_credit_score(input_df, base_score=300, scale_length=600):
-    x = np.dot(input_df.values, model.coef_.T) + model.intercept_
+    # Use model's own probability — don't recompute manually
+    default_probability = model.predict_proba(input_df)[:, 1][0]
 
-    default_probability = 1 / (1 + np.exp(-x))
+    # Back-derive logit from probability (single source of truth)
+    # Clip probability away from 0/1 to avoid log(0)
+    prob_clipped = np.clip(default_probability, 1e-10, 1 - 1e-10)
+    logit = np.log(prob_clipped / (1 - prob_clipped))
 
-    x_clipped = np.clip(x, LOGIT_MIN, LOGIT_MAX)
+    # Clip logit for score normalization
+    logit_clipped = np.clip(logit, LOGIT_MIN, LOGIT_MAX)
 
-    normalized = (
-        (LOGIT_MAX - x_clipped)
-        / (LOGIT_MAX - LOGIT_MIN)
-    )
+    # Higher logit = higher default risk = lower score
+    normalized = (LOGIT_MAX - logit_clipped) / (LOGIT_MAX - LOGIT_MIN)
 
-    credit_score = (
-        base_score
-        + normalized.flatten() * scale_length
-    )
+    credit_score = base_score + normalized * scale_length
 
-    rating = _get_rating(credit_score[0])
+    rating = _get_rating(credit_score)
 
-    return (
-        default_probability.flatten()[0],
-        int(credit_score[0]),
-        rating
-    )
+    return default_probability, int(credit_score), rating
 
 
 def _get_rating(score):
