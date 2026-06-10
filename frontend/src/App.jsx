@@ -2430,13 +2430,6 @@ function ResultsDashboard({ result, form, onReset }) {
           >
             New Assessment
           </button>
-          <button
-            className="btn-secondary"
-            style={{ whiteSpace: "nowrap" }}
-            onClick={() => window.print()}
-          >
-            Export Report
-          </button>
         </div>
       </div>
 
@@ -2573,23 +2566,16 @@ function Footer() {
               marginBottom: 8,
             }}
           >
-            <div
+            <img
+              src="/favicon.png"
+              alt="RiskLens Logo"
               style={{
-                width: 28,
-                height: 28,
-                background: COLORS.gold,
-                borderRadius: 5,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontWeight: 900,
-                fontSize: 14,
-                color: "#000",
-                fontFamily: "JetBrains Mono, monospace",
+                width: 32,
+                height: 32,
+                borderRadius: 6,
+                objectFit: "contain",
               }}
-            >
-              R
-            </div>
+            />
             <span style={{ fontWeight: 700, color: "#fff" }}>RiskLens</span>
           </div>
           <div style={{ fontSize: 12, color: "rgba(255,255,255,0.3)" }}>
@@ -2597,12 +2583,7 @@ function Footer() {
           </div>
         </div>
         <div style={{ display: "flex", gap: 32, flexWrap: "wrap" }}>
-          {[
-            "XGBoost Model",
-            "AUC 0.9834",
-            "14,996 Samples",
-            "Basel III Aligned",
-          ].map((t) => (
+          {["AUC 0.9834", "14,996 Samples"].map((t) => (
             <span
               key={t}
               style={{
