@@ -1,7 +1,3 @@
-# RiskLens — Credit Default Risk Prediction Platform
-
----
-
 # RiskLens
 
 > **Institutional-grade credit default risk prediction — end-to-end ML pipeline to deployed full-stack application.**
