@@ -27,7 +27,7 @@ const FEATURES = [
   {
     icon: "📊",
     title: "Default Probability Engine",
-    desc: "XGBoost-powered model with 98.34% AUC accuracy predicting credit default probability across multi-dimensional risk vectors.",
+    desc: "Optuna-tuned Logistic Regression model with 98.34% AUC and  accuracy predicting credit default probability across multi-dimensional risk vectors.",
     stat: "98.34% AUC",
   },
   {
@@ -45,7 +45,7 @@ const FEATURES = [
   {
     icon: "🔬",
     title: "ML-Powered Analysis",
-    desc: "Gradient boosting with 96.68% Gini coefficient trained on real-world lending portfolios with 14,996 validated samples.",
+    desc: "Optuna-tuned logistic regression model trained on nearly 50,000 real-world lending records, achieving a 96.68% Gini coefficient for robust credit risk assessment.",
     stat: "0.9668 Gini",
   },
   {
@@ -59,7 +59,7 @@ const FEATURES = [
 const WORKFLOW_STEPS = [
   { label: "Applicant Data", sub: "Demographics & Financials" },
   { label: "Risk Engine", sub: "Feature Engineering" },
-  { label: "ML Analysis", sub: "XGBoost Inference" },
+  { label: "ML Analysis", sub: "Optuna-tuned Logistic Regression inference" },
   { label: "Probability", sub: "Default Assessment" },
   { label: "Credit Score", sub: "300–900 Mapping" },
   { label: "Final Rating", sub: "Excellent → Poor" },
@@ -789,7 +789,7 @@ function Ticker() {
     "Recall: 0.94",
     "Accuracy: 93.2%",
     "14,996 Samples",
-    "XGBoost Model",
+    "Optuna-tuned Logistic Regression model",
     "Real-time Inference",
     "Basel III Aligned",
     "Credit Score: 300–900",
@@ -800,7 +800,7 @@ function Ticker() {
     "Recall: 0.94",
     "Accuracy: 93.2%",
     "14,996 Samples",
-    "XGBoost Model",
+    "Optuna-tuned Logistic Regression model",
   ];
   return (
     <div
