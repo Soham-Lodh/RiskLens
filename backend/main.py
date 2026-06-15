@@ -37,6 +37,7 @@ class CreditRiskOutput(BaseModel):
 def main():
     return model_status()
     
+    
 @app.post("/predict_credit_risk", response_model=CreditRiskOutput)
 def predict_credit_risk(input: CreditRiskInput):
     try:
