@@ -769,7 +769,7 @@ function Hero() {
           <HeroMetric label="Gini Coeff." value="0.9668" delay={1.1} />
           <HeroMetric
             label="Samples"
-            value="14,996"
+            value="50,000+"
             sub="Training"
             delay={1.2}
           />
